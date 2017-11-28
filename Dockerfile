@@ -6,7 +6,9 @@ RUN a2enmod rewrite
 RUN docker-php-ext-install mysqli
 
 RUN apt-get update -y \
-    && apt-get install -y libpng-dev libjpeg62-turbo-dev \
+    && apt-get install -y libpng-dev libjpeg62-turbo-dev ssmtp \
+    && apt-get clean \
+    && echo "FromLineOverride=YES" >> /etc/ssmtp/ssmtp.conf \
     && docker-php-ext-configure gd --with-jpeg-dir=/usr/include/
 
 RUN docker-php-ext-install gd
