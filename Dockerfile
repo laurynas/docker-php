@@ -2,7 +2,7 @@ FROM php:7.1-apache
 
 COPY php.ini /usr/local/etc/php/
 
-RUN a2enmod rewrite
+RUN a2enmod rewrite remoteip
 RUN docker-php-ext-install mysqli
 
 RUN apt-get update -y \
