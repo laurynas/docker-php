@@ -2,8 +2,13 @@
 
 Based on official docker PHP image.
 
-It has some extra features enabled:
+Optimized for small instances. Allows passing Apache tuning via env variables.
+Enables email sending via SSMTP.
+
+Extra PHP features enabled:
 - MySQL
 - GD
 
-Optimized for small instances. Allows passing Apache tuning via env variables.
+Extra Apache modules enabled:
+- rewrite
+- remoteip
