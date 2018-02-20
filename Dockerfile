@@ -11,6 +11,7 @@ RUN apt-get update -y \
     && docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
     && docker-php-ext-install mysqli \
+    && docker-php-ext-install opcache \
     && a2enmod rewrite remoteip \
     && a2enconf remoteip \
     && a2enconf tuning
