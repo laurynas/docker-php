@@ -16,6 +16,8 @@ RUN apt-get update -y \
     && a2enconf remoteip \
     && a2enconf tuning
 
+COPY msmtp/msmtprc /etc/msmtprc
+
 ENV APACHE_KEEP_ALIVE On
 ENV APACHE_MAX_KEEP_ALIVE_REQUESTS 10
 ENV APACHE_KEEP_ALIVE_TIMEOUT 1
