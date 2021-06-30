@@ -3,7 +3,7 @@
 Based on official docker PHP image.
 
 Optimized for small instances. Allows passing Apache tuning via env variables.
-Enables email sending via SSMTP.
+Enables email sending via MSMTP.
 
 Extra PHP features enabled:
 - MySQL

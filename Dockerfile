@@ -5,10 +5,9 @@ COPY apache/remoteip.conf /etc/apache2/conf-available/
 COPY apache/tuning.conf /etc/apache2/conf-available/
 
 RUN apt-get update -y \
-    && apt-get install -y libpng-dev libjpeg62-turbo-dev ssmtp zlib1g-dev \
+    && apt-get install -y libpng-dev libjpeg62-turbo-dev msmtp libzip-dev \
     && apt-get clean \
-    && echo "FromLineOverride=YES" >> /etc/ssmtp/ssmtp.conf \
-    && docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-configure gd --with-jpeg \
     && docker-php-ext-install gd \
     && docker-php-ext-install mysqli \
     && docker-php-ext-install opcache \
