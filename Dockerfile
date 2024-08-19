@@ -4,7 +4,8 @@ COPY php.ini /usr/local/etc/php/
 COPY apache/remoteip.conf /etc/apache2/conf-available/
 COPY apache/tuning.conf /etc/apache2/conf-available/
 
-RUN apt-get update -y \
+RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list \
+    && apt-get update -y \
     && apt-get install -y libpng-dev libjpeg62-turbo-dev ssmtp zlib1g-dev \
     && apt-get clean \
     && echo "FromLineOverride=YES" >> /etc/ssmtp/ssmtp.conf \
