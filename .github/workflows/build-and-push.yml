@@ -29,4 +29,5 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: kurmisrainas/php:${GITHUB_REF##*/}
+          tags: kurmisrainas/php:5-apache
+
