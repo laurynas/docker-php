@@ -1,4 +1,4 @@
-FROM php:8.4-apache
+FROM php:8.5-apache
 
 COPY php.ini /usr/local/etc/php/
 COPY apache/remoteip.conf /etc/apache2/conf-available/
@@ -10,7 +10,6 @@ RUN apt-get update -y \
     && docker-php-ext-configure gd --with-jpeg \
     && docker-php-ext-install gd \
     && docker-php-ext-install mysqli \
-    && docker-php-ext-install opcache \
     && docker-php-ext-install zip \
     && a2enmod rewrite remoteip \
     && a2enconf remoteip \
