@@ -3,7 +3,7 @@ name: build-and-push
 on:
   push:
     branches:
-      - 8.4-apache
+      - 8.2-apache
 
 jobs:
   docker_build:
@@ -30,8 +30,8 @@ jobs:
 
       - name: Build and push
         run: |
-          docker build -t kurmisrainas/php:8.4-apache-${{matrix.arch}} .
-          docker push kurmisrainas/php:8.4-apache-${{matrix.arch}}
+          docker build -t kurmisrainas/php:8.2-apache-${{matrix.arch}} .
+          docker push kurmisrainas/php:8.2-apache-${{matrix.arch}}
 
   docker_manifest:
     needs: docker_build
@@ -45,5 +45,5 @@ jobs:
 
       - name: Create and push manifest
         run: |
-          docker manifest create kurmisrainas/php:8.4-apache kurmisrainas/php:8.4-apache-amd64 kurmisrainas/php:8.4-apache-arm64
-          docker manifest push kurmisrainas/php:8.4-apache
+          docker manifest create kurmisrainas/php:8.2-apache kurmisrainas/php:8.2-apache-amd64 kurmisrainas/php:8.2-apache-arm64
+          docker manifest push kurmisrainas/php:8.2-apache
