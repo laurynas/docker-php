@@ -3,7 +3,7 @@ name: build-and-push
 on:
   push:
     branches:
-      - 7.4-apache
+      - 7.4-apache-cve-2026
 
 jobs:
   docker_build:
@@ -21,7 +21,7 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -30,8 +30,8 @@ jobs:
 
       - name: Build and push
         run: |
-          docker build -t kurmisrainas/php:7.4-apache-${{matrix.arch}} .
-          docker push kurmisrainas/php:7.4-apache-${{matrix.arch}}
+          docker build --pull -t kurmisrainas/php:7.4.33-apache-cve-2026-${{matrix.arch}} .
+          docker push kurmisrainas/php:7.4.33-apache-cve-2026-${{matrix.arch}}
 
   docker_manifest:
     needs: docker_build
@@ -45,5 +45,5 @@ jobs:
 
       - name: Create and push manifest
         run: |
-          docker manifest create kurmisrainas/php:7.4-apache kurmisrainas/php:7.4-apache-amd64 kurmisrainas/php:7.4-apache-arm64
-          docker manifest push kurmisrainas/php:7.4-apache
+          docker manifest create kurmisrainas/php:7.4.33-apache-cve-2026 kurmisrainas/php:7.4.33-apache-cve-2026-amd64 kurmisrainas/php:7.4.33-apache-cve-2026-arm64
+          docker manifest push kurmisrainas/php:7.4.33-apache-cve-2026
