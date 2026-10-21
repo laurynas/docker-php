@@ -1,4 +1,4 @@
-FROM php:8.2-apache
+FROM php:8.2.35-apache
 
 COPY php.ini /usr/local/etc/php/
 COPY apache/remoteip.conf /etc/apache2/conf-available/

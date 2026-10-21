@@ -30,7 +30,7 @@ jobs:
 
       - name: Build and push
         run: |
-          docker build -t kurmisrainas/php:8.2-apache-${{matrix.arch}} .
+          docker build --pull -t kurmisrainas/php:8.2-apache-${{matrix.arch}} .
           docker push kurmisrainas/php:8.2-apache-${{matrix.arch}}
 
   docker_manifest:
