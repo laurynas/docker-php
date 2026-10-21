@@ -13,7 +13,7 @@ jobs:
         include:
           - os: ubuntu-latest
             arch: amd64
-          - os: ubuntu-latest
+          - os: ubuntu-24.04-arm
             arch: arm64
     steps:
       - name: Branch name
@@ -30,8 +30,11 @@ jobs:
 
       - name: Build and push
         run: |
-          docker build --pull -t kurmisrainas/php:7.4.33-apache-cve-2026-${{matrix.arch}} .
-          docker push kurmisrainas/php:7.4.33-apache-cve-2026-${{matrix.arch}}
+          image="kurmisrainas/php:7.4.33-apache-cve-2026-${{ matrix.arch }}"
+          docker build --pull -t "$image" .
+          built="$(docker image inspect --format '{{.Architecture}}' "$image")"
+          test "$built" = "${{ matrix.arch }}"
+          docker push "$image"
 
   docker_manifest:
     needs: docker_build
