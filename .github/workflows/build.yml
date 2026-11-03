@@ -22,11 +22,11 @@ jobs:
           repo="kurmisrainas/php"
           version=8.5
           date=$(date -u +%Y%m%d)
-          runid="${version}-${date}-${{ github.run_id }}"
+          snapshot="${version}-${date}-${{ github.run_id }}"
           docker buildx build --file Dockerfiles/8.5/Dockerfile \
             --platform linux/amd64,linux/arm64 \
             -t "${repo}:${version}" \
-            -t "${repo}:${runid}" \
+            -t "${repo}:${snapshot}" \
             --push .
 
   build-php-74:
@@ -44,9 +44,9 @@ jobs:
           repo="kurmisrainas/php"
           version=7.4
           date=$(date -u +%Y%m%d)
-          runid="${version}-${date}-${{ github.run_id }}-cve-patched"
+          snapshot="${version}-${date}-${{ github.run_id }}-cve-patched"
           docker buildx build --file Dockerfiles/7.4/Dockerfile \
             --platform linux/amd64,linux/arm64 \
             -t "${repo}:${version}" \
-            -t "${repo}:${runid}" \
+            -t "${repo}:${snapshot}" \
             --push .
