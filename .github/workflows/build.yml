@@ -22,11 +22,12 @@ jobs:
           repo="kurmisrainas/php"
           version=8.5
           date=$(date -u +%Y%m%d)
-          runid="${date}-${{ github.run_id }}"
-          tags="${repo}:${version} ${repo}:${version}-${runid}"
+          runid="${version}-${date}-${{ github.run_id }}"
           docker buildx build --file Dockerfiles/8.5/Dockerfile \
             --platform linux/amd64,linux/arm64 \
-            -t "$tags" --push .
+            -t "${repo}:${version}" \
+            -t "${repo}:${runid}" \
+            --push .
 
   build-php-74:
     if: github.event_name != 'schedule'
@@ -43,8 +44,9 @@ jobs:
           repo="kurmisrainas/php"
           version=7.4
           date=$(date -u +%Y%m%d)
-          runid="${date}-${{ github.run_id }}-cve-patched"
-          tags="${repo}:${version} ${repo}:${version}-${runid}"
+          runid="${version}-${date}-${{ github.run_id }}-cve-patched"
           docker buildx build --file Dockerfiles/7.4/Dockerfile \
             --platform linux/amd64,linux/arm64 \
-            -t "$tags" --push .
+            -t "${repo}:${version}" \
+            -t "${repo}:${runid}" \
+            --push .
