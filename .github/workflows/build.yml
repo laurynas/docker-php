@@ -22,7 +22,8 @@ jobs:
           repo="kurmisrainas/php"
           version=8.5
           date=$(date -u +%Y%m%d)
-          tags="${repo}:${version} ${repo}:${version}-${date} ${repo}:${{ github.run_id }}"
+          runid="${date}-${{ github.run_id }}"
+          tags="${repo}:${version} ${repo}:${version}-${runid}"
           docker buildx build --file Dockerfiles/8.5/Dockerfile \
             --platform linux/amd64,linux/arm64 \
             -t "$tags" --push .
@@ -42,7 +43,8 @@ jobs:
           repo="kurmisrainas/php"
           version=7.4
           date=$(date -u +%Y%m%d)
-          tags="${repo}:${version} ${repo}:${version}-${date} ${repo}:${{ github.run_id }}-cve-patched"
+          runid="${date}-${{ github.run_id }}-cve-patched"
+          tags="${repo}:${version} ${repo}:${version}-${runid}"
           docker buildx build --file Dockerfiles/7.4/Dockerfile \
             --platform linux/amd64,linux/arm64 \
             -t "$tags" --push .
