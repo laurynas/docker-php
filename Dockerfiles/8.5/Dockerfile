@@ -8,13 +8,14 @@ COPY apache/tuning.conf /etc/apache2/conf-available/
 RUN set -eux; \
     apt-get update -y && \
     apt-get install -y --no-install-recommends \
+        default-libmysqlclient-dev \
         libpng-dev \
         libjpeg62-turbo-dev \
         libzip-dev \
         msmtp \
     ; \
     docker-php-ext-configure gd --with-jpeg; \
-    docker-php-ext-install gd zip; \
+    docker-php-ext-install gd mysqli zip; \
     a2enmod rewrite remoteip; \
     a2enconf remoteip tuning;
 

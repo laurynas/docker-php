@@ -29,6 +29,7 @@ RUN set -eux; \
       libxml2-dev \
       zlib1g-dev \
       patch \
+      default-libmysqlclient-dev \
       libpng-dev \
       libjpeg62-turbo-dev \
       libzip-dev \
@@ -50,7 +51,7 @@ RUN set -eux; \
     find /usr/local -type f -perm '/0111' -exec sh -euxc 'strip --strip-all "$@" || :' -- '{}' +; \
     cd /; \
     docker-php-ext-configure gd --with-jpeg; \
-    docker-php-ext-install gd opcache zip; \
+    docker-php-ext-install gd mysqli opcache zip; \
     docker-php-source delete; \
     a2enmod rewrite remoteip; \
     a2enconf remoteip tuning; \
