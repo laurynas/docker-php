@@ -3,10 +3,10 @@
 Based on official Docker PHP images.
 
 Optimized for small instances. Allows passing Apache tuning via env variables.
-Enables email sending via SSMTP.
+Enables email sending via msmtp (PHP `sendmail_path`).
 
 Extra PHP features enabled:
-- MySQL
+- MySQL (`mysqli`)
 - GD (with JPEG support)
 - Zip
 - OPcache (7.x only; 8.x ships it as core)
@@ -22,10 +22,12 @@ Extra Apache modules enabled:
 | `8.5`  | 8.5         | Active, auto-tracks upstream       |
 | `7.4`  | 7.4 (EOL)   | EOL, hand-maintained CVE backports |
 
+CI also pushes dated snapshot tags: `8.5-YYYYMMDD-<run_id>` and `7.4-YYYYMMDD-<run_id>-cve-patched`.
+
 ## CI Builds
 
-- **8.5**: Monthly schedule (1st of month, 06:00 UTC) + on-push + manual dispatch
-- **7.4**: On-push + manual only (no timer — EOL, only changes with new patches)
+- **8.5**: Monthly schedule (1st of month, 06:00 UTC) + push to `main` + manual dispatch
+- **7.4**: Push to `main` + manual only (no timer — EOL, only changes with new patches)
 
 Both versions are built for `linux/amd64` and `linux/arm64` in a single multi-arch step.
 
@@ -52,4 +54,4 @@ docker pull kurmisrainas/php:8.5   # or 7.4
 
 ### Email
 
-SSMTP is configured by default to send via port 25 (no TLS, no auth) to host `mail`. Override with your own mail configuration.
+msmtp is configured by default to send via port 25 (no TLS, no auth) to host `mail`. Override by replacing `/etc/msmtprc` or mounting your own config.
