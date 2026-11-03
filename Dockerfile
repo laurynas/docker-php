@@ -2,6 +2,7 @@ FROM php:7.1-apache
 
 COPY php.ini /usr/local/etc/php/
 COPY apache/remoteip.conf /etc/apache2/conf-available/
+COPY apache/mpm_prefork.conf /etc/apache2/mods-available/mpm_prefork.conf
 COPY apache/tuning.conf /etc/apache2/conf-available/
 
 RUN apt-get update -y \
@@ -22,6 +23,6 @@ ENV APACHE_MAX_KEEP_ALIVE_REQUESTS 10
 ENV APACHE_KEEP_ALIVE_TIMEOUT 1
 ENV APACHE_START_SERVERS 1
 ENV APACHE_MIN_SPARE_SERVERS 1
-ENV APACHE_MAX_SPARE_SERVERS 5
-ENV APACHE_MAX_REQUEST_WORKERS 150
-ENV APACHE_MAX_CONNECTIONS_PER_CHILD 1024
+ENV APACHE_MAX_SPARE_SERVERS 2
+ENV APACHE_MAX_REQUEST_WORKERS 4
+ENV APACHE_MAX_CONNECTIONS_PER_CHILD 200
